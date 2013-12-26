@@ -82,13 +82,15 @@ func decodeRFC2047Word(s string) (string, error) {
 }
 
 func Decode(s string) (ret string) {
+    sep := ""
     for _, p := range strings.Split(s, " ") {
         r, err := decodeRFC2047Word(p)
         if err != nil {
-            ret += p
+            ret += sep + p
         } else {
-            ret += r
+            ret += sep + r
         }
+        sep = " "
     }
     return
 }
